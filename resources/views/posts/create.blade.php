@@ -10,6 +10,7 @@
 
 <body>
 
+
     <nav
         style="display: flex; justify-content: space-between; align-items: center; 
     background-color: #eeeeee; padding: 15px 30px; 
@@ -55,13 +56,17 @@
             @csrf
 
             <!-- Title Input -->
-            <input type="text" name="title" placeholder="Title"
+            <input type="text" name="title" placeholder="Title" value="{{ old('title') }}"
                 style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; box-sizing: border-box;">
-
+            @error('title')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
             <!-- Content Textarea -->
             <textarea name="content" placeholder="Content"
-                style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; box-sizing: border-box; height: 200px;"></textarea>
-
+                style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; box-sizing: border-box; height: 200px;">{{ old('content') }}</textarea>
+            @error('content')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
             <!-- Create Button -->
             <button type="submit"
                 style="width: 100%; padding: 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">

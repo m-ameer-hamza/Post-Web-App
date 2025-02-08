@@ -19,11 +19,9 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
 });
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('posts', PostController::class);
 
 });
-
 Route::fallback([ErrorController::class, 'show']);

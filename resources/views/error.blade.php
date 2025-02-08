@@ -15,9 +15,6 @@
         <h2 style="font-size: 24px; color: #333; margin-bottom: 15px;">Oops! Page Not Found</h2>
         <p style="font-size: 16px; color: #666; margin-bottom: 20px;">The request you made does not exist or has been
             removed.</p>
-        {{-- <a href="/"
-            style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background: #ff4a57; border: none; border-radius: 5px; text-decoration: none; transition: background 0.3s;">Go
-            Back Home</a> --}}
     </div>
 </body>
 

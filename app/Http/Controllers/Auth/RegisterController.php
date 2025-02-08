@@ -16,11 +16,16 @@ class RegisterController extends Controller
 
     public function store(UserRequest $request)
     {
-
         $reg_data = $request->validated();
+        if ($reg_data['role'] === 'user') {
+            $reg_data['active'] = 'approved';
+        }
         $reg_data['password'] = bcrypt($reg_data['password']);
         $user = User::create($reg_data);
         Auth::login($user);
+        if ($user->role === 'admin') {
+            return view('admin.request');
+        }
 
         return redirect('/home');
     }

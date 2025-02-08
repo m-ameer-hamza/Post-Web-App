@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ErrorController;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    // ... other admin routes
+});
+
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'show');
     Route::post('/register', 'store');

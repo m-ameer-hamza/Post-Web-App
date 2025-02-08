@@ -15,10 +15,14 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-
         $login_data = $request->validated();
 
         if (Auth::attempt($login_data)) {
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect('/admin/dashboard');
+            }
+
             return redirect('/home');
         }
 

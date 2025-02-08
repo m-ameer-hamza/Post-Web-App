@@ -38,14 +38,14 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);
     }
 
-    public function edit(Post $post)
+    public function edit(PostRequest $request, Post $post)
     {
-
-        $post->update();
+        $post->update($request->validated());
 
         return redirect('/home');
-
     }
+
+    public function update() {}
 
     public function destroy(Post $post)
     {

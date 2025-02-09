@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Posts</title>
+    <title>Navbar & Sidebar</title>
 </head>
 
 <body style="margin: 0; font-family: Arial, sans-serif;">
@@ -78,68 +78,15 @@
             </form>
         </div>
     </nav>
+
     <!-- Main Content -->
-    <div
-        style="display: flex; flex-direction: column; align-items: center; 
-            margin-top: 70px; padding: 20px; width: calc(100% - 250px); 
-            margin-left: 250px; min-height: calc(100vh - 70px);">
+    <div class="content" style="margin-left: 250px; margin-top: 70px; padding: 20px;">
+        <h2 style="text-align: center; font-size: 30px; color: #333; margin-bottom: 20px;">
+            Create Post
+        </h2>
+        @include('posts.partials.form', ['action' => url('/admin/posts')])
 
-        <!-- Heading -->
-        <div style="text-align: center;">
-            <h1>All Posts</h1>
-            <p>You can manage the posts created by all the users</p>
-        </div>
-
-        <!-- Card Container -->
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
-
-            @if ($posts->isEmpty())
-                <div style="padding: 20px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                    <h3 style="text-align: center;">No posts yet</h3>
-                    <p style="text-align: center; color: gray;">Be the first to create a post!</p>
-                </div>
-            @else
-                @foreach ($posts as $post)
-                    <div
-                        style="width: 400px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-                        border: 1px solid #ddd; background-color: white;">
-
-                        <!-- Title (Centered in the Card) -->
-                        <h2 style="text-align: center; margin-bottom: 10px; color: #333;">{{ $post->title }}</h2>
-
-                        <!-- Post Content (Limited to 2 Lines) -->
-                        <p
-                            style="color: #555; font-size: 16px; line-height: 1.5; 
-                        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
-                        overflow: hidden; text-overflow: ellipsis;">
-                            {{ $post->content }}
-                        </p>
-
-                        <!-- Author and Button Section -->
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-                            <!-- Author Name (Left Side) -->
-                            <span style="color: #007bff; font-weight: bold; font-size: 14px;">By:
-                                {{ $post->userData->name }}</span>
-
-                            <!-- View Button (Right Side) -->
-                            <button
-                                style="background-color: #007bff; color: white; border: none; 
-                            padding: 8px 15px; cursor: pointer; font-size: 14px; 
-                            border-radius: 5px; transition: 0.3s;"
-                                onclick="window.location.href='/admin/posts/{{ $post->id }}';"
-                                onmouseover="this.style.backgroundColor='#0056b3';"
-                                onmouseout="this.style.backgroundColor='#007bff';">
-                                View
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
-
-        </div>
     </div>
-
 
 </body>
 

@@ -57,10 +57,10 @@
 
         <!-- Links -->
         <div>
-            <a href="/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
+            <a href="/admin/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
                 onmouseout="this.style.color='black'; this.style.textDecoration='none';">My Posts</a>
-            <a href="/posts/create" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
+            <a href="/admin/posts/create" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
                 onmouseout="this.style.color='black'; this.style.textDecoration='none';">Create Post</a>
         </div>

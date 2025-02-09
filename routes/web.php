@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ErrorController;
@@ -9,6 +12,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [DashBoardController::class, 'dashboard']);
+    Route::get('/requests', [DashBoardController::class, 'requests']);
+    Route::patch('/accountRequest', [DashBoardController::class, 'accountRequest']);
+    Route::resource('posts', AdminPostController::class);
+    // ... other admin routes related to posts
+    Route::resource('users', AdminUserController::class);
 });
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'show');

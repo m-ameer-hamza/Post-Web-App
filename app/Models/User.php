@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $attributes = [
+        'active' => 'pending',
+    ];
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'active',
     ];
 
     /**

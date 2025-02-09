@@ -15,10 +15,23 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
-
         $login_data = $request->validated();
 
         if (Auth::attempt($login_data)) {
+            $user = Auth::user();
+
+            if ($user->active === 'terminated') {
+                return view('terminate');
+
+            }
+            if ($user->role === 'admin') {
+                if ($user->active === 'pending') {
+                    return view('request');
+                }
+
+                return redirect('/admin/dashboard');
+            }
+
             return redirect('/home');
         }
 

@@ -26,6 +26,8 @@ class UserRequest extends FormRequest
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'min:6', 'max:20'],
+            'role' => ['required', Rule::in(['admin', 'user'])],
+            'active' => [Rule::in(['approved', 'pending', 'rejected'])],
         ];
     }
 }

@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $user = User::create($reg_data);
         Auth::login($user);
         if ($user->role === 'admin') {
-            return view('admin.request');
+            return view('request');
         }
 
         return redirect('/home');

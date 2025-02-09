@@ -19,7 +19,16 @@ class LoginController extends Controller
 
         if (Auth::attempt($login_data)) {
             $user = Auth::user();
+
+            if ($user->active === 'terminated') {
+                return view('terminate');
+
+            }
             if ($user->role === 'admin') {
+                if ($user->active === 'pending') {
+                    return view('request');
+                }
+
                 return redirect('/admin/dashboard');
             }
 

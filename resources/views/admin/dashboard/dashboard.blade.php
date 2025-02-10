@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar & Sidebar</title>
+    <title>Admin Dashboard</title>
 </head>
 
 <body style="margin: 0; font-family: Arial, sans-serif;">
@@ -57,9 +57,9 @@
 
         <!-- Links -->
         <div>
-            <a href="/admin/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
+            {{-- <a href="/admin/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
-                onmouseout="this.style.color='black'; this.style.textDecoration='none';">My Posts</a>
+                onmouseout="this.style.color='black'; this.style.textDecoration='none';">My Posts</a> --}}
             <a href="/admin/posts/create" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
                 onmouseout="this.style.color='black'; this.style.textDecoration='none';">Create Post</a>

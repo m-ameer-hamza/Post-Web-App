@@ -57,9 +57,9 @@
 
         <!-- Links -->
         <div>
-            <a href="/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
+            {{-- <a href="/posts" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
-                onmouseout="this.style.color='black'; this.style.textDecoration='none';">My Posts</a>
+                onmouseout="this.style.color='black'; this.style.textDecoration='none';">My Posts</a> --}}
             <a href="/posts/create" style="color: black; text-decoration: none; margin: 0 15px; font-size: 18px;"
                 onmouseover="this.style.color='blue'; this.style.textDecoration='underline';"
                 onmouseout="this.style.color='black'; this.style.textDecoration='none';">Create Post</a>
@@ -114,45 +114,40 @@
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);">
                     Created At: {{ $user->updated_at->format('M d, Y') }}
                 </span>
-                @if ($user->active === 'approved')
-                    <form action="/admin/users/{{ $user->id }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button
-                            style="background-color: #ff4d4d; color: white; border: none; 
+                {{-- Hide this termination/active form if current admin visists --}}
+                @if (auth()->check() && auth()->id() !== $user->id)
+                    @if ($user->active === 'approved')
+                        <form action="/admin/users/{{ $user->id }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button
+                                style="background-color: #ff4d4d; color: white; border: none; 
                     padding: 8px 15px; cursor: pointer; font-size: 14px; 
                     border-radius: 5px; transition: 0.3s;"
-                            onmouseover="this.style.backgroundColor='#cc0000';"
-                            onmouseout="this.style.backgroundColor='#ff4d4d';">
-                            Terminate
-                        </button>
-                    </form>
-                @elseif ($user->active === 'terminated')
-                    <form action="/admin/users/{{ $user->id }}/edit" method="GET">
-                        @csrf
-                        <button
-                            style="background-color: #28a745; color: white; border: none; 
+                                onmouseover="this.style.backgroundColor='#cc0000';"
+                                onmouseout="this.style.backgroundColor='#ff4d4d';">
+                                Terminate
+                            </button>
+                        </form>
+                    @elseif ($user->active === 'terminated')
+                        <form action="/admin/users/{{ $user->id }}/edit" method="GET">
+                            @csrf
+                            <button
+                                style="background-color: #28a745; color: white; border: none; 
     padding: 8px 15px; cursor: pointer; font-size: 14px; 
     border-radius: 20px; transition: 0.3s;"
-                            onmouseover="this.style.backgroundColor='#218838';"
-                            onmouseout="this.style.backgroundColor='#28a745';">
-                            Unblock
-                        </button>
+                                onmouseover="this.style.backgroundColor='#218838';"
+                                onmouseout="this.style.backgroundColor='#28a745';">
+                                Unblock
+                            </button>
 
-                    </form>
-                @else
+                        </form>
+                    @else
+                    @endif
                 @endif
-
-
-
             </div>
-
-
-
         </div>
     </div>
-
-
 </body>
 
 </html>

@@ -51,32 +51,38 @@
         <h2 style="text-align: center; font-size: 30px; color: #333; margin-bottom: 20px;">All Posts</h2>
 
         {{-- This is how to loop through an array in blade --}}
-        @foreach ($posts as $post)
-            <div
-                style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; display: flex; justify-content: space-between; align-items: center;">
-                {{--   This is how to display value of variable in blade --}}
-                <div style="flex: 1;">
-                    <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">{{ $post['title'] }}</h3>
-                    <p style="font-size: 16px; color: #555; margin-bottom: 10px;">by <span
-                            style="font-weight: bold; color: #007BFF;">{{ $post->userData->name }}</span></p>
-                    <p style="font-size: 16px; color: #666; line-height: 1.6;">{{ $post['content'] }}</p>
+        @if ($posts->isEmpty())
+            <p style="text-align: center; font-size: 24px; color: #555; margin-bottom: 20px;">No posts found.</p>
+        @else
+            @foreach ($posts as $post)
+                <div
+                    style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; display: flex; justify-content: space-between; align-items: center;">
+                    {{--   This is how to display value of variable in blade --}}
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">{{ $post['title'] }}</h3>
+                        <p style="font-size: 16px; color: #555; margin-bottom: 10px;">by <span
+                                style="font-weight: bold; color: #007BFF;">{{ $post->userData->name }}</span></p>
+                        <p style="font-size: 16px; color: #666; line-height: 1.6;">{{ $post['content'] }}</p>
+                    </div>
+                    <div>
+                        {{-- Conditionally display Updated or Created button --}}
+                        @if ($post->updated_at == $post->created_at)
+                            <button
+                                style="background-color: #28a745; color: white; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease;">
+                                Created at {{ $post->created_at->diffForHumans() }}
+                            </button>
+                        @else
+                            <button
+                                style="background-color: #007bff; color: white; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease;">
+                                Updated at {{ $post->updated_at->diffForHumans() }}
+                            </button>
+                        @endif
+                    </div>
                 </div>
-                <div>
-                    {{-- Conditionally display Updated or Created button --}}
-                    @if ($post->updated_at == $post->created_at)
-                        <button
-                            style="background-color: #28a745; color: white; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease;">
-                            Created at {{ $post->created_at->diffForHumans() }}
-                        </button>
-                    @else
-                        <button
-                            style="background-color: #007bff; color: white; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer; transition: background-color 0.3s ease;">
-                            Updated at {{ $post->updated_at->diffForHumans() }}
-                        </button>
-                    @endif
-                </div>
-            </div>
-        @endforeach
+            @endforeach
+
+        @endif
+
     </div>
 
 

@@ -50,32 +50,38 @@
         <h2 style="text-align: center; font-size: 30px; color: #333; margin-bottom: 20px;">Your Posts</h2>
 
         {{-- This is how to loop through an array in blade --}}
-        @foreach ($user_posts as $post)
-            <div
-                style="background-color: #ffffff; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;">
-                {{--   This is how to display value of variable in blade --}}
-                <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">{{ $post['title'] }}</h3>
-                <p style="font-size: 16px; color: #666; margin-bottom: 15px;">{{ $post['content'] }}</p>
+        @if ($user_posts->isEmpty())
+            <p style="text-align: center; font-size: 24px; color: #555; margin-bottom: 20px;">No posts found.</p>
+        @else
+            @foreach ($user_posts as $post)
+                <div
+                    style="background-color: #ffffff; border-radius: 8px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out;">
+                    {{--   This is how to display value of variable in blade --}}
+                    <h3 style="font-size: 24px; color: #333; margin-bottom: 10px;">{{ $post['title'] }}</h3>
+                    <p style="font-size: 16px; color: #666; margin-bottom: 15px;">{{ $post['content'] }}</p>
 
-                <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                    <!-- Edit Button -->
-                    <a href="/posts/{{ $post->id }}"
-                        style="display: inline-block; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; font-size: 16px; text-align: center; transition: background-color 0.3s;">
-                        Edit
-                    </a>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                        <!-- Edit Button -->
+                        <a href="/posts/{{ $post->id }}"
+                            style="display: inline-block; padding: 10px 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; font-size: 16px; text-align: center; transition: background-color 0.3s;">
+                            Edit
+                        </a>
 
-                    <!-- Delete Form -->
-                    <form action="/posts/{{ $post->id }}" method="post" style="display: inline;">
-                        @csrf
-                        @method('delete')
-                        <button type="submit"
-                            style="padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
-                            Delete
-                        </button>
-                    </form>
+                        <!-- Delete Form -->
+                        <form action="/posts/{{ $post->id }}" method="post" style="display: inline;">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"
+                                style="padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+
+        @endif
+
     </div>
 
 

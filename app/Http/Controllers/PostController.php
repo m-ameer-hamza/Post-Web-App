@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -33,9 +34,15 @@ class PostController extends Controller
         return redirect('/home');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
-        return view('posts.show', compact('post'));
+        try {
+            $post = Post::findOrFail($id);
+
+            return view('posts.show', compact('post'));
+        } catch (ModelNotFoundException $e) {
+            return app(ErrorController::class)->show();
+        }
     }
 
     public function edit(PostRequest $request, Post $post)

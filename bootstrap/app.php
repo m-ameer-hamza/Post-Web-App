@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,5 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias(['admin' => \App\Http\Middleware\AdminMiddleware::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->renderable(function (ModelNotFoundException $exception, $request) {
+            return response()->view('errors.notfound', ['title' => 'Resourse Not Found', 'message' => 'The resource you are looking for could not be found.']);
+        });
     })->create();

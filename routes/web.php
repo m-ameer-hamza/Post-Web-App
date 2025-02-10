@@ -19,7 +19,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/requests', [DashBoardController::class, 'requests']);
     Route::patch('/accountRequest', [DashBoardController::class, 'accountRequest']);
     Route::resource('posts', AdminPostController::class);
-    // ... other admin routes related to posts
     Route::resource('users', AdminUserController::class);
 });
 Route::controller(RegisterController::class)->group(function () {
